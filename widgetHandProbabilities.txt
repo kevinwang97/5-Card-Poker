@@ -1,0 +1,11 @@
+Name	#Hands	Probability
+Straight Flush 39 0.000005
+Five of a kind 190 0.000026
+Flush 836 0.000116
+Four of a kind 17857 0.002480
+Full house 54633 0.007588
+Straight 85627 0.011893
+Three of a kind 444130 0.061685
+Two pair 795877 0.110538
+Bust 2082412 0.289224
+One pair 3718399 0.516444
