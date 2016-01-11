@@ -3,42 +3,46 @@
 #include <time.h>
 
 #define NUM_TRIALS 600000
-#define OUTPUT_FILE "widgetHandProbabilities.txt"
+#define OUTPUT_FILE "pokerHandProbabilities.txt"
+#define CHAR_LENGTH 20
 //CARD HAND RANKING
 #define NUM_HAND_TYPE 10
-#define STRAIGHT_FLUSH 0
-#define FIVE_OF_A_KIND 1
-#define FLUSH 2
-#define FOUR_OF_A_KIND 3
-#define FULL_HOUSE 4
-#define STRAIGHT 5
-#define THREE_OF_A_KIND 6
-#define TWO_PAIR 7
-#define BUST 8
-#define ONE_PAIR 9
+#define ROYAL_FLUSH 9
+#define STRAIGHT_FLUSH 8
+#define FOUR_OF_A_KIND 7
+#define FULL_HOUSE 6
+#define FLUSH 5
+#define STRAIGHT 4
+#define THREE_OF_A_KIND 3
+#define TWO_PAIR 2
+#define ONE_PAIR 1
+#define BUST 0
 //Poker Related Constants
-#define NUM_COLOURS 7
-#define NUM_RANKS 9
-#define NUM_CARDS 63
-#define NUM_CARD_HAND 5
+#define NUM_SUITS 4
+#define NUM_RANKS 13
+#define NUM_CARDS 52
+#define HAND_SIZE 5
 #define NUM_HANDS 12
 
-const char cardHandRanking [][20] = {"Straight Flush", "Five of a kind", "Flush", "Four of a kind", "Full house", "Straight",
-	"Three of a kind", "Two pair", "Bust", "One pair"};
-typedef enum RankType {one, two, three, four, five, six, seven, eight, nine};
-const char rank[][10] {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-typedef enum ColourType {red, blue, green, yellow, black, pink, white};
-const char colour[][10] = {"red", "blue", "green", "yellow", "black", "pink", "white"};
+const char cardHandRanking [NUM_HAND_TYPE][CHAR_LENGTH] =
+	{"Bust", "One pair", "Two pair", "Three of a kind", "Straight", "Flush",
+	"Full house", "Four of a kind", "Straight Flush", "Royal Flush"};
+typedef enum {two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace} RankType;
+const char rank[NUM_RANKS][CHAR_LENGTH] =
+	{"two", "three", "four", "five", "six", "seven", "eight",
+	"nine", "ten", "jack", "queen", "king", "ace"};
+typedef enum {clubs, diamonds, hearts, spades} SuitType;
+const char suit[NUM_SUITS][CHAR_LENGTH] = {"clubs", "diamonds", "hearts", "spades"};
 
 typedef struct {
-	ColourType colour;
+	SuitType suit;
 	RankType rank;
 } Card;
 
 void initDeck (Card *deck) {
-	for (int i = 0; i < NUM_COLOURS; i++) {
+	for (int i = 0; i < NUM_SUITS; i++) {
 		for (int j = 0; j < NUM_RANKS; j++) {
-			deck[i * NUM_RANKS + j].colour = (ColourType) i;
+			deck[i * NUM_RANKS + j].suit = (SuitType) i;
 			deck[i * NUM_RANKS + j].rank = (RankType) j;
 		}
 	}
@@ -58,29 +62,32 @@ void shuffleDeck (Card *deck) {
 	}
 }
 
-void dealHands (Card *deck, Card hand[NUM_HANDS][NUM_CARD_HAND]) {
-	for (int i = 0; i < NUM_CARD_HAND; i++)
+void dealHands (Card *deck, Card hand[NUM_HANDS][HAND_SIZE]) {
+	for (int i = 0; i < HAND_SIZE; i++)
 		for (int j = 0; j < NUM_HANDS; j++)
 			hand[j][i] = deck[i + j];
 }
 
+//returns 0 if no straight, otherwise returns lowest card in straight
 int isStraight (int *cardValueCount) {
-	int straightStarted = 0, count = 0;
+	int straightStarted = 0, startVal = 0, count = 0;
 	for (int i = 0; i < NUM_RANKS; i++) {
 		if (!straightStarted && cardValueCount[i] == 1) {
 			straightStarted = 1;
+			startVal = i + 2; //cards start at 2
 			count++;
 		}
+		else if (straightStarted && count == HAND_SIZE - 1 && startVal == 2 && cardValueCount[12] == 1) return 1; // 'wheel' or 'bicycle' straight (A2345)
 		else if (!straightStarted && cardValueCount[i] > 1 || straightStarted && cardValueCount[i] != 1) return 0;
 		else if (straightStarted && cardValueCount[i] == 1) count++;
-		if (count == NUM_CARD_HAND) return 1;
+		if (count == HAND_SIZE) return startVal;
 	}
 }
 
 int isFlush (Card *hand) {
-	ColourType c = hand[0].colour;
-	for (int i = 0; i < NUM_CARD_HAND; i++) {
-		if (hand[i].colour != c) return 0;
+	SuitType c = hand[0].suit;
+	for (int i = 0; i < HAND_SIZE; i++) {
+		if (hand[i].suit != c) return 0;
 	}
 	return 1;
 }
@@ -94,20 +101,22 @@ int numNOfAKind (int *cardValueCount, int n) {
 }
 
 int evaluateHand (Card *hand) {
-	int cardValueCount[NUM_RANKS] = {0};
-	int flush, straight, triple, numDouble;
-	for (int i = 0; i < NUM_CARD_HAND; i++) {
-		cardValueCount[hand[i].rank]++;
+	int cardRankCount[NUM_RANKS] = {0};
+	int flush, straight, triple, quad, numDouble;
+	for (int i = 0; i < HAND_SIZE; i++) {
+		cardRankCount[hand[i].rank]++;
 	}
 	flush = isFlush (hand);
-	straight = isStraight (cardValueCount);
-	triple = numNOfAKind (cardValueCount, 3);
-	numDouble = numNOfAKind (cardValueCount, 2);
-	if (straight && flush) return STRAIGHT_FLUSH;
-	else if (numNOfAKind (cardValueCount, 5) == 1) return FIVE_OF_A_KIND;
-	else if (flush) return FLUSH;
-	else if (numNOfAKind (cardValueCount, 4) == 1) return FOUR_OF_A_KIND;
+	straight = isStraight (cardRankCount);
+	quad = numNOfAKind (cardRankCount, 4);
+	triple = numNOfAKind (cardRankCount, 3);
+	numDouble = numNOfAKind (cardRankCount, 2);
+	
+	if (straight == 10 && flush) return ROYAL_FLUSH;
+	if (straight != 0 && flush) return STRAIGHT_FLUSH;
+	else if (quad == 1) return FOUR_OF_A_KIND;
 	else if (triple == 1 && numDouble == 1) return FULL_HOUSE;
+	else if (flush) return FLUSH;
 	else if (straight) return STRAIGHT;
 	else if (triple == 1) return THREE_OF_A_KIND;
 	else if (numDouble == 2) return TWO_PAIR;
@@ -127,7 +136,7 @@ void printResults (int *results) {
 int main () {
 	srand (time (NULL));
 	Card deck[NUM_CARDS];
-	Card hand[NUM_HANDS][NUM_CARD_HAND];
+	Card hand[NUM_HANDS][HAND_SIZE];
 	int handTypeCount [NUM_HAND_TYPE] = {0};
 	
 	initDeck (deck);

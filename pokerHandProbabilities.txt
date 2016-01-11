@@ -1,0 +1,11 @@
+Name	#Hands	Probability
+Bust 3608153 0.501132
+One pair 3043114 0.422655
+Two pair 342907 0.047626
+Three of a kind 150903 0.020959
+Straight 28293 0.003930
+Flush 14394 0.001999
+Full house 10356 0.001438
+Four of a kind 1791 0.000249
+Straight Flush 80 0.000011
+Royal Flush 9 0.000001

@@ -1,0 +1,267 @@
+5 Games of Widget will be played!
+===========================
+Game #1 (6 players)
+
+Player 1 (Bust)
+
+hearts six
+clubs three
+hearts seven
+spades five
+hearts two
+
+Player 2 (Bust)
+
+spades nine
+diamonds ten
+diamonds seven
+clubs two
+hearts ace
+
+Player 3 (Bust)
+
+diamonds king
+spades seven
+spades eight
+diamonds six
+diamonds two
+
+Player 4 (Bust)
+
+spades six
+diamonds eight
+hearts king
+diamonds ace
+clubs ten
+
+Player 5 (One pair)
+
+hearts nine
+spades four
+hearts queen
+spades king
+clubs queen
+
+Player 6 (One pair)
+
+spades ace
+clubs six
+spades ten
+clubs nine
+clubs ace
+
+The Winner of game 1 is player 6 with a One pair
+==========================================================
+
+Game #2 (6 players)
+
+Player 1 (One pair)
+
+spades seven
+diamonds six
+hearts eight
+diamonds five
+hearts five
+
+Player 2 (Bust)
+
+hearts queen
+clubs king
+diamonds two
+spades ace
+spades ten
+
+Player 3 (One pair)
+
+clubs jack
+diamonds ace
+hearts six
+spades five
+spades six
+
+Player 4 (Bust)
+
+clubs queen
+spades king
+hearts seven
+diamonds three
+clubs six
+
+Player 5 (Bust)
+
+diamonds nine
+clubs eight
+spades three
+clubs five
+hearts two
+
+Player 6 (Bust)
+
+hearts nine
+diamonds four
+clubs ten
+diamonds jack
+hearts king
+
+The Winner of game 2 is player 3 with a One pair
+==========================================================
+
+Game #3 (6 players)
+
+Player 1 (Bust)
+
+spades three
+hearts nine
+hearts queen
+hearts seven
+spades eight
+
+Player 2 (Flush)
+
+clubs three
+clubs king
+clubs five
+clubs seven
+clubs ten
+
+Player 3 (One pair)
+
+hearts three
+diamonds seven
+hearts jack
+clubs queen
+diamonds queen
+
+Player 4 (One pair)
+
+diamonds jack
+clubs eight
+clubs four
+hearts king
+diamonds four
+
+Player 5 (One pair)
+
+hearts eight
+diamonds six
+diamonds two
+spades two
+spades nine
+
+Player 6 (One pair)
+
+hearts six
+hearts two
+spades five
+diamonds nine
+spades six
+
+The Winner of game 3 is player 2 with a Flush
+==========================================================
+
+Game #4 (6 players)
+
+Player 1 (One pair)
+
+spades nine
+diamonds three
+hearts king
+diamonds eight
+spades king
+
+Player 2 (Bust)
+
+hearts seven
+spades ace
+clubs nine
+hearts jack
+diamonds two
+
+Player 3 (One pair)
+
+diamonds queen
+diamonds jack
+spades two
+diamonds ace
+clubs ace
+
+Player 4 (One pair)
+
+diamonds king
+clubs jack
+clubs king
+clubs eight
+hearts six
+
+Player 5 (Bust)
+
+spades queen
+diamonds nine
+clubs three
+diamonds six
+hearts ten
+
+Player 6 (One pair)
+
+diamonds seven
+spades six
+spades seven
+spades jack
+hearts three
+
+The Winner of game 4 is player 3 with a One pair
+==========================================================
+
+Game #5 (6 players)
+
+Player 1 (Bust)
+
+clubs five
+clubs two
+spades seven
+clubs ten
+spades queen
+
+Player 2 (Bust)
+
+diamonds five
+spades four
+spades nine
+clubs jack
+diamonds eight
+
+Player 3 (Bust)
+
+spades ten
+spades two
+diamonds queen
+clubs eight
+clubs ace
+
+Player 4 (Bust)
+
+spades eight
+clubs queen
+hearts king
+diamonds jack
+diamonds nine
+
+Player 5 (One pair)
+
+diamonds six
+spades king
+diamonds ace
+hearts six
+diamonds three
+
+Player 6 (Bust)
+
+hearts nine
+hearts ten
+clubs three
+hearts queen
+spades five
+
+The Winner of game 5 is player 5 with a One pair
+==========================================================
+
